@@ -1,0 +1,9 @@
+# Code editors
+.idea
+
+# Migrations
+db
+
+# Misc
+.env.example
+LICENSE
