@@ -6,7 +6,6 @@ DROP TYPE appointment_status;
 DROP TABLE IF EXISTS ratings;
 DROP TABLE IF EXISTS services;
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS contact_data;
 DROP TABLE IF EXISTS counties;
 DROP TABLE IF EXISTS countries;
 

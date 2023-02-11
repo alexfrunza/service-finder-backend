@@ -16,51 +16,49 @@ CREATE TABLE IF NOT EXISTS counties (
 			ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS contact_data (
+CREATE TABLE IF NOT EXISTS users (
 	id SERIAL PRIMARY KEY,
 	country_id INTEGER NOT NULL,
 	county_id INTEGER NOT NULL,
-	phone_number VARCHAR(50) NOT NULL,
-	address VARCHAR(300) NOT NULL,
-
-	CONSTRAINT fk_country
-		FOREIGN KEY(country_id)
-			REFERENCES countries(id)
-			ON DELETE CASCADE,
-
-	CONSTRAINT fk_county
-		FOREIGN KEY(county_id)
-			REFERENCES counties(id)
-			ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS users (
-	id SERIAL PRIMARY KEY,
-	contact_data_id INTEGER NOT NULL,
 	email VARCHAR(300) UNIQUE NOT NULL,
 	first_name VARCHAR(100) NOT NULL,
 	last_name VARCHAR(100) NOT NULL,
 	password VARCHAR(255) NOT NULL,
 	admin BOOLEAN DEFAULT false NOT NULL,
+	phone_number VARCHAR(50) NOT NULL,
 	create_time TIMESTAMPTZ DEFAULT NOW() NOT NULL,
 
-	CONSTRAINT fk_contact_data
-		FOREIGN KEY(contact_data_id)
-			REFERENCES contact_data(id)
+	CONSTRAINT fk_country
+		FOREIGN KEY(country_id)
+			REFERENCES countries(id)
+			ON DELETE CASCADE,
+	
+	CONSTRAINT fk_county
+		FOREIGN KEY(county_id)
+			REFERENCES counties(id)
 			ON DELETE CASCADE
+
 );
 
 CREATE TABLE IF NOT EXISTS services (
 	id SERIAL PRIMARY KEY,
-	contact_data_id INTEGER NOT NULL,
+	country_id INTEGER NOT NULL,
+	county_id INTEGER NOT NULL,
 	email VARCHAR(300) UNIQUE NOT NULL,
 	name VARCHAR(50) NOT NULL,
 	password VARCHAR(255) NOT NULL,
+	phone_number VARCHAR(50) NOT NULL,
+	address VARCHAR(300) NOT NULL,
 	create_time TIMESTAMPTZ DEFAULT NOW() NOT NULL,
 
-	CONSTRAINT fk_contact_data
-		FOREIGN KEY(contact_data_id)
-			REFERENCES contact_data(id)
+	CONSTRAINT fk_country
+		FOREIGN KEY(country_id)
+			REFERENCES countries(id)
+			ON DELETE CASCADE,
+	
+	CONSTRAINT fk_county
+		FOREIGN KEY(county_id)
+			REFERENCES counties(id)
 			ON DELETE CASCADE
 );
 
