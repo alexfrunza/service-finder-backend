@@ -68,6 +68,7 @@ func AddRoutes(e *echo.Echo) error {
 	e.Use(middleware.Recover())
 	e.Validator = &CustomValidator{validator: validator.New()}
 
+	addStatusRoutes(e)
 	addUserRoutes(e)
 	addCountiesRoutes(e)
 	addCountriesRoutes(e)
@@ -89,4 +90,8 @@ func addCountiesRoutes(e *echo.Echo) {
 func addCountriesRoutes(e *echo.Echo) {
 	countriesRouter := e.Group("/countries")
 	countriesRouter.GET("/", getCountries)
+}
+
+func addStatusRoutes(e *echo.Echo) {
+	e.GET("/status", getStatus)
 }
