@@ -4,6 +4,9 @@
 # Migrations
 db
 
+# Scripts
+scripts
+
 # Misc
 .env.example
 LICENSE
