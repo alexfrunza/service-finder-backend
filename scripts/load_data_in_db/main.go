@@ -74,9 +74,9 @@ func getCountryIdByName(db *sql.DB, name string) (int, error) {
 func main() {
 	log.SetFlags(0)
 
-	connStr, ok := os.LookupEnv("POSTGRESQL_URL")
+	connStr, ok := os.LookupEnv("DATABASE_URL")
 	if !ok {
-		log.Fatalln("You must set POSTGRESQL_URL!")
+		log.Fatalln("You must set DATABASE_URL!")
 	}
 
 	db, err := sql.Open("postgres", connStr)

@@ -13,9 +13,9 @@ var DB *sql.DB
 func init() {
 	var err error
 
-	connStr, ok := os.LookupEnv("POSTGRESQL_URL")
+	connStr, ok := os.LookupEnv("DATABASE_URL")
 	if !ok {
-		log.Fatalln("You must set in environment variables POSTGRESQL_URL!")
+		log.Fatalln("You must set in environment variables DATABASE_URL!")
 	}
 
 	DB, err = sql.Open("postgres", connStr)
