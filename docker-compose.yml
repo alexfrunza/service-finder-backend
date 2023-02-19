@@ -4,8 +4,7 @@ services:
   servicefinder:
     depends_on: 
       - database
-    build:
-      context: .
+    image: servicefinder-server
     container_name: servicefinder-server
     hostname: servicefinder-server
     networks:
