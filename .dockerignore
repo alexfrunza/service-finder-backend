@@ -2,7 +2,10 @@
 .idea
 
 # Migrations
-db
+db/migrations
+
+# Database
+.db-data
 
 # Scripts
 scripts

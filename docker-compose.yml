@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  servicefinder:
+    depends_on: 
+      - database
+    build:
+      context: .
+    container_name: servicefinder-server
+    hostname: servicefinder-server
+    networks:
+      - servicefinder-net
+    ports:
+      - 8080:8080
+    environment:
+      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DATABASE_HOSTNAME}:5432/${POSTGRES_DB}?sslmode=disable
+    deploy:
+      restart_policy:
+        condition: on-failure
+  database:
+    image: postgres
+    container_name: servicefinder-postgres
+    hostname: ${DATABASE_HOSTNAME}
+    networks:
+      - servicefinder-net
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - ./.db-data/:/var/lib/postgresql/data/
+
+networks:
+  servicefinder-net:
+    driver: bridge

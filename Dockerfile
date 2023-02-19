@@ -5,9 +5,10 @@ FROM golang:alpine AS build
 
 WORKDIR /app
 
-COPY go.mod ./
+COPY go.mod .
+COPY go.sum .
 
-COPY *.go ./
+COPY . .
 
 RUN go build -o /servicefinder cmd/servicefinder/main.go
 
